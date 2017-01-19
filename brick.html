@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		* {margin: 0;padding: 0;overflow: hidden;} 	
+
+		html, body {width: 100%;height: 100%;}
+
+		div {
+			display: inline-block;
+			width: 10%;
+			height: 20px;
+			background: gray url(brick.jpg) no-repeat center;
+		}
+
+		#baffle {
+			width: 150px;
+			height: 10px;
+			background: gray url(baffle.jpg) no-repeat center;
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			margin-left: -50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="brick"></div>
+	<div class="brick"></div>
+	<div class="brick"></div>
+	<div class="brick"></div>
+	<div class="brick"></div>
+	<div class="brick"></div>
+	<div class="brick"></div>
+	<div class="brick"></div>
+	<div class="brick"></div>
+	<div class="brick"></div>
+	<div class="brick"></div>
+	<div class="brick"></div>
+	<div class="brick"></div>
+	<div class="brick"></div>
+	<p id="ball" style="position: absolute;top: 500px;left: 500px;width: 20px;height: 20px;border-radius: 20px;background: radial-gradient(darkgray, gray)">
+	</p>
+	<div id="baffle"></div>
+	<script type="text/javascript" src="brick.js"></script>
+</body>
+</html>
