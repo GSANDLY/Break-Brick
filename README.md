@@ -1,3 +1,2 @@
 # Break-Brick
-a classical game 'break brick'  
-Open 'brick.html' in browser, and play.
+Open 'brick.html' in browser, and play.:punch:
