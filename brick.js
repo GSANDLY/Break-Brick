@@ -33,18 +33,18 @@ window.onload = function(){
 	 */
 	function ballMove(isUp, isLeft, ballStl, tan){
 		if(!isUp){
-			ballStl.top = parseFloat(ballStl.top) + (2 * tan) + "px";
+			ballStl.top = parseFloat(ballStl.top) + (1 * tan) + "px";
 			if(!isLeft){
-				ballStl.left = parseFloat(ballStl.left) + 2 + "px";
+				ballStl.left = parseFloat(ballStl.left) + 1 + "px";
 			}else{
-				ballStl.left = parseFloat(ballStl.left) - 2 + "px";
+				ballStl.left = parseFloat(ballStl.left) - 1 + "px";
 			}
 		}else if(isUp){
-			ballStl.top = parseFloat(ballStl.top) - (2 * tan) + "px";
+			ballStl.top = parseFloat(ballStl.top) - (1 * tan) + "px";
 			if(!isLeft){
-				ballStl.left = parseFloat(ballStl.left) + 2 + "px";
+				ballStl.left = parseFloat(ballStl.left) + 1 + "px";
 			}else{
-				ballStl.left = parseFloat(ballStl.left) - 2 + "px";
+				ballStl.left = parseFloat(ballStl.left) - 1 + "px";
 			}
 		}
 	}
@@ -157,9 +157,17 @@ window.onload = function(){
 			}
 			ballCollisionOthers(isBrick, brick, bLeft, bTop, bWidth, bHeight);
 		}
-
-		// 是否碰到边界
+		
+		// 处理碰到上、左、右墙壁的情况
 		reachBoundary(ball, bLeft, bWidth, bTop, bHeight);
+
+		// 有没有接住小球
+		var isDead = die(ball, bTop, bHeight);
+		if (isDead === true) {
+			alert("Please restart.");
+			location.reload();
+			return;
+		}
 
 		setTimeout(function(){
 			run(ball, ballMoveSettings.isUp, ballMoveSettings.isLeft, ballMoveSettings.tan);
@@ -167,11 +175,12 @@ window.onload = function(){
 	}
 
 	/*
-	 * 是否碰到边界
+	 * 碰到边界
 	 * ball 小球元素 DOM
-	 * bLeft 小球 left float
-	 * bWidth 小球 width float
-	 * bTop 小球 height float
+	 * bLeft 小球的 left type: float
+	 * bWidth 小球的 width type: float
+	 * bHeight 小球的 height type: float
+	 * bTop 小球的 top type: float
 	 */
 	function reachBoundary(ball, bLeft, bWidth, bTop, bHeight){
 		if(bLeft <= 0){
@@ -183,9 +192,20 @@ window.onload = function(){
 		if(bTop <= 0){
 			ballMoveSet(undefined, false, undefined);
 		}
-		if(bTop+bHeight >= ball.parentNode.clientHeight){
-			ballMoveSet(undefined, true, undefined);
+	}
+	
+	/**
+	 * 是否没接住小球
+	 * ball 小球元素 DOM
+	 * bTop 小球的 top type: float 
+	 * bHeight 小球的 height type: float
+	 * 返回 true：没接住 false：接住了
+	 */
+	function die(ball, bTop, bHeight) {
+		if(bTop + bHeight >= ball.parentNode.clientHeight){
+			return true;
 		}
+		return false;
 	}
 
 	/*
